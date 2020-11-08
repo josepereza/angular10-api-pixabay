@@ -1,0 +1,37 @@
+<div class="container">
+
+    <form #f="ngForm" (ngSubmit)="onSearchPhoto(f.value)">
+        <div class="form-group">
+          <label for="keyword"></label>
+          <div class="row">
+            <input class="form-control col-4" required="" type="text" name="keyword"
+                   placeholder="Introduce cualquier nombre" ngModel [(ngModel)]="moCle">
+            <button [disabled]="!f.valid" class="btn btn-sm btn-info fa fa-search col-1.5">Search</button>
+          </div>
+        </div>
+      </form>
+    <div class="card-columns">
+        <div class="card " style="background-color: rgba(140, 173, 162, 0.2);" *ngFor="let p of lesPhotos | paginate: { itemsPerPage: 6, currentPage: p}">
+          <img src="{{p.webformatURL}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{p.tags}}</h5>
+            <div class="row">
+                <div class="col-md">
+                    <p class="card-text">Autor : {{p.user}}</p>
+                </div>
+                <div class="col-md">
+                    <p>UserI : <img src="{{p.userImageURL}}" alt="" height="60" class="rounded-circle"></p>
+                </div>
+                
+              </div>
+           
+
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+       
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
